@@ -2,7 +2,7 @@
 include 'tateti.php';
 
 // Colleccion de ejemplo para probar funciones
-$colleccionDeJuegos = [
+$coleccionDeJuegos = [
     ["jugadorCruz" => "a", "jugadorCirculo" => "b", "puntosCruz" => 5, "puntosCirculo" => 0], ["jugadorCruz" => "a", "jugadorCirculo" => "b", "puntosCruz" => 1, "puntosCirculo" => 4],["jugadorCruz" => "c", "jugadorCirculo" => "a", "puntosCruz" => 2, "puntosCirculo" => 1],
     ["jugadorCruz" => "b", "jugadorCirculo" => "c", "puntosCruz" => 2, "puntosCirculo" => 1],
     ["jugadorCruz" => "d", "jugadorCirculo" => "a", "puntosCruz" => 1, "puntosCirculo" => 1]
@@ -11,14 +11,14 @@ $colleccionDeJuegos = [
 
 // 3) mostrar primer juego ganador de cierto jugador
 
-function primerJuegoGanador($nombreJugador, $colleccionDeJuegos) {
+function indicePrimerJuegoGanador($nombreJugador, $arrayJuegos) {
     $i = 0;
     
-    while ($i < count($colleccionDeJuegos)) {
-        if ($nombreJugador == $colleccionDeJuegos[$i]["jugadorCruz"] && $colleccionDeJuegos[$i]["puntosCruz"] > $colleccionDeJuegos[$i]["puntosCirculo"]) {
+    while ($i < count($arrayJuegos)) {
+        if ($nombreJugador == $arrayJuegos[$i]["jugadorCruz"] && $arrayJuegos[$i]["puntosCruz"] > $arrayJuegos[$i]["puntosCirculo"]) {
             return $i;
             
-        } elseif ($nombreJugador == $colleccionDeJuegos[$i]["jugadorCirculo"] && $colleccionDeJuegos[$i]["puntosCruz"] < $colleccionDeJuegos[$i]["puntosCirculo"]) {
+        } elseif ($nombreJugador == $arrayJuegos[$i]["jugadorCirculo"] && $arrayJuegos[$i]["puntosCruz"] < $arrayJuegos[$i]["puntosCirculo"]) {
             return $i;
         }
         $i++;
@@ -30,36 +30,41 @@ function primerJuegoGanador($nombreJugador, $colleccionDeJuegos) {
 
 echo "ingrese nombre de jugador \n";
 $nJ = trim(fgets(STDIN));
-echo primerJuegoGanador($nJ, $colleccionDeJuegos);
+echo indicePrimerJuegoGanador($nJ, $coleccionDeJuegos);
 
 
 // 4) mostrar porcentaje de juegos ganados
 
-echo "Ingresar símbolo: \n";
-$simb = trim(fgets(STDIN));
+function porcentajeJuegosGanados($simbolo, $arrayJuegos) {
 
-$contadorTotal = 0;
-$contadorX = 0;
-$contadorO = 0;
-
-for ($i = 0; $i < count($colleccionDeJuegos); $i++) {
-    if ($colleccionDeJuegos[$i]["puntosCruz"] > $colleccionDeJuegos[$i]["puntosCirculo"] || $colleccionDeJuegos[$i]["puntosCruz"] < $colleccionDeJuegos[$i]["puntosCirculo"]) {
-        $contadorTotal++;
-        if($colleccionDeJuegos[$i]["puntosCruz"] > $colleccionDeJuegos[$i]["puntosCirculo"]) {
-            $contadorX++;
-        } else {
-            $contadorO++;
+    $contadorTotal = 0;
+    $contadorX = 0;
+    $contadorO = 0;
+    
+    for ($i = 0; $i < count($arrayJuegos); $i++) {
+        if ($arrayJuegos[$i]["puntosCruz"] > $arrayJuegos[$i]["puntosCirculo"] || $arrayJuegos[$i]["puntosCruz"] < $arrayJuegos[$i]["puntosCirculo"]) {
+            $contadorTotal++;
+            if($arrayJuegos[$i]["puntosCruz"] > $arrayJuegos[$i]["puntosCirculo"]) {
+                $contadorX++;
+            } else {
+                $contadorO++;
+            }
         }
+    }
+    
+    $promX = $contadorX * 100 / $contadorTotal;
+    $promO = $contadorO * 100 / $contadorTotal;
+    
+    if ($simbolo == "X") {
+        echo "Juegos totales con ganador: ".$contadorTotal."\n";
+        echo "El promedio de X fue de $promX% \n";
+    } else if ($simbolo == "O") {
+        echo "Juegos totales con ganador: ".$contadorTotal."\n";
+        echo "El promedio de O fue de $promO%\n";
     }
 }
 
-$promX = $contadorX * 100 / $contadorTotal;
-$promO = $contadorO * 100 / $contadorTotal;
 
-if ($simb == "X") {
-    echo "Juegos totales con ganador: ".$contadorTotal."\n";
-    echo "El promedio de X fue de $promX% \n";
-} else if ($simb == "O") {
-    echo "Juegos totales con ganador: ".$contadorTotal."\n";
-    echo "El promedio de O fue de $promO%\n";
-}
+echo "Ingresar símbolo: \n";
+$simb = trim(fgets(STDIN));
+porcentajeJuegosGanados($simb, $coleccionDeJuegos);
