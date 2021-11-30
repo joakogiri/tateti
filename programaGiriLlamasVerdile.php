@@ -33,19 +33,25 @@ function cargarJuegos()
     $juegosEjemplos[7] = ["jugadorCruz" => "sebastian", "jugadorCirculo" => "majo", "puntosCruz" => 1, "puntosCirculo" => 1];
     $juegosEjemplos[8] = ["jugadorCruz" => "sebastian", "jugadorCirculo" => "lisa", "puntosCruz" => 0, "puntosCirculo" => 1];
     $juegosEjemplos[9] = ["jugadorCruz" => "sebastian", "jugadorCirculo" => "brisa", "puntosCruz" => 0, "puntosCirculo" => 5];
-
+    
     return $juegosEjemplos;
 }
+
+// $juegosJugados[0] = ["jugadorCruz" => $jugarJuego["jugadorCruz"], "jugadorCirculo" => $jugarJuego["jugadorCirculo"]];
+
 
 function inicializar() {
     $opcion = seleccionarOpcion();
 
     if ($opcion == 1) {
-        jugar();
-        inicializar();
+        $jugarJuego = jugar();
+        imprimirResultado($jugarJuego);
+
+        inicializar(); 
     }
     if ($opcion == 2) {
         echo "Funcion 2\n";
+
     }
     if ($opcion == 3) {
         echo "Introduce nombre de jugador: \n";
