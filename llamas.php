@@ -5,3 +5,9 @@ $coleccionDeJuegos = [
     ["jugadorCruz" => "b", "jugadorCirculo" => "c", "puntosCruz" => 2, "puntosCirculo" => 1],
     ["jugadorCruz" => "d", "jugadorCirculo" => "a", "puntosCruz" => 1, "puntosCirculo" => 1]
 ];
+
+
+function mostrarJuego($juegosColeccion) {
+
+    $numeroJuego = intval(trim(fgets(STDIN)));
+}
