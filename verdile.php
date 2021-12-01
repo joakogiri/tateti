@@ -97,12 +97,7 @@ function ordenadoPorO($coleccionDeJuegos) {
 
   function cmp($a, $b) {
 
-    if($a['jugadorCirculo'] == $b['jugadorCruz']) {
-
-        return 0;
-    }
-
-    return ($a['jugadorCirculo'] > $b['jugadorCruz']) ? -1 : 1;
+    return strcmp($a['jugadorCruz'], $b['jugadorCirculo']);
 }
 
   uasort($coleccionDeJuegos, 'cmp');

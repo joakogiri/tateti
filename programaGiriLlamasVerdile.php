@@ -357,19 +357,15 @@ function juegosGanadosPorSimbolo($simbolo, $arrayJuegos) {
 }
 
 /** (PUNTO 11)
- * ACÁ VA EL PUNTO 6 DE MARCOS
+ * Compara los strings en las claves "jugadorCirculo" de cada array
+ * @param array $coleccionDeJuegos
 */
 function ordenadoPorO($coleccionDeJuegos) {
 
     function cmp($a, $b) {
   
-      if($a['jugadorCirculo'] == $b['jugadorCruz']) {
-  
-          return 0;
-      }
-  
-      return ($a['jugadorCirculo'] > $b['jugadorCruz']) ? -1 : 1;
-  }
+      return strcmp($a['jugadorCirculo'], $b['jugadorCirculo']);
+    }
   
     uasort($coleccionDeJuegos, 'cmp');
     print_r($coleccionDeJuegos);
