@@ -157,25 +157,6 @@ function indicePrimerJuegoGanador($nombreJugador, $arrayJuegos) {
     return -1;
 }
 
-/** Buscar símbolo del jugador
- * @param array $juegosArray
- * @param int $index
- * @param string $jugadorNombre
- * @return int
-*/
-
-function jugadorSimbolo($juegosArray, $index, $jugadorNombre) {
-
-    if ($juegosArray[$index]["jugadorCruz"] == $jugadorNombre) {
-
-        return "X";
-
-    } else {
-
-        return "O";
-    }
-}
-
 /** (PUNTO 7)
  *  ACÁ VA EL PUNT 5 DE MARCOS
  */
@@ -311,11 +292,18 @@ do {
             echo "El jugador ".$nombreJugador." no ha ganado ningún juego.\n";
 
         } else {
-
-            $simboloJugador = jugadorSimbolo($coleccionJuegos, $incide, $nombreJugador);
-
+            
+            if ($coleccionJuegos[$indice]["jugadorCruz"] == $nombreJugador) {
+        
+                $simboloJugador = "X";
+        
+            } else {
+        
+                $simboloJugador = "O";
+            }
+            
             echo "**********************\n";
-            echo "Juego TATETI: " .$indice." (ganó ".$simboloJugador.")\n";
+            echo "Juego TATETI: " .($indice + 1)." (ganó ".$simboloJugador.")\n";
             echo "Jugador X: " .$coleccionJuegos[$indice]["jugadorCruz"]." obtuvo ".$coleccionJuegos[$indice]["puntosCruz"]." puntos\n";
             echo "Jugador X: " .$coleccionJuegos[$indice]["jugadorCirculo"]." obtuvo ".$coleccionJuegos[$indice]["puntosCirculo"]." puntos\n";
             echo "**********************\n";
