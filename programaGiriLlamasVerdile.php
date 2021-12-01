@@ -6,7 +6,9 @@ include "tateti.php";
 /**************************************/
 
 /* Apellido, Nombre. Legajo. Carrera. mail. Usuario Github */
-/* ... Giri Joaquín FAI 3538 - TUDW - joaquin.giri@est.fi.uncoma.edu.ar - github: @joakogiri ... */
+/* ... Verdile Marcos FAI 3184 - TUDW - marcosverdile@gmail.com - github: @NightFawkes...*/
+/* ... Giri Joaquín FAI 3538 - TUDW - joaquin.giri@est.fi.uncoma.edu.ar - github: @joakogiri ...*/
+/* ... Llamas Yamila  - FAI-1925 - mail:yamila.llamas@est.fi.uncoma.edu.ar - github: yamillalu...*/
 
 
 
