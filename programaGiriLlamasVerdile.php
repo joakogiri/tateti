@@ -158,8 +158,95 @@ function indicePrimerJuegoGanador($nombreJugador, $arrayJuegos) {
 }
 
 /** (PUNTO 7)
- *  ACÁ VA EL PUNT 5 DE MARCOS
+ * Función que genera y guarda el resumen de un jugador
+ * @param array $arrayDatosJuegos
+ * @return array
  */
+function resumenJugador($arrayDatosJuegos) { 
+    //inicializo las variables
+        $n = count ($arrayDatosJuegos);
+        $i = 0;
+        $flag = true;
+        $puntosGanar = 0;
+        $puntosPerder = 0;
+        $puntosEmpatar = 0;
+        $puntosTotal = 0;
+      
+       echo "ingrese nombre de jugador \n";
+       $nombreJugador = strtoupper(trim(fgets(STDIN)));
+      // estructura repetitiva que se ejecuta cuando la cantidad de juegos sea mayor a 0
+       for ($i = 0; $i < $n; $i++) {
+      //estructura del tipo si que evalua coincidencias en el nombre del jugador con el registro de juegos y asigna un contador por cada resultado posible
+      //se les agrega un contador para aumentar el valor con el que se comparan la cantidad de juegos y usarlo de stop
+        if ($nombreJugador == $arrayDatosJuegos[$i]["jugadorCruz"] || $nombreJugador == $arrayDatosJuegos[$i]["jugadorCruz"]) {
+            
+       
+          if ($nombreJugador == $arrayDatosJuegos[$i]["jugadorCruz"]) {
+    
+             if ($arrayDatosJuegos[$i]["puntosCruz"] > $arrayDatosJuegos[$i]["puntosCirculo"]) {
+            
+              $puntosGanar++;
+              $puntosTotal = $puntosTotal + $arrayDatosJuegos[$i]["puntosCruz"];
+              $i++;
+              
+              
+            } elseif ($nombreJugador == $arrayDatosJuegos[$i]["jugadorCruz"]) {
+    
+              if ($arrayDatosJuegos[$i]["puntosCruz"] == $arrayDatosJuegos[$i]["puntosCirculo"]) {
+               
+                $puntosEmpatar++;
+                $puntosTotal = $puntosTotal + $arrayDatosJuegos[$i]["puntosCruz"];
+                $i++;
+               
+               
+              } else {
+    
+                  $puntosPerder++;
+                  $i++;
+                  
+                }    
+                  
+            } 
+          } elseif ($nombreJugador == $arrayDatosJuegos[$i]["jugadorCirculo"]) {
+    
+            if ($arrayDatosJuegos[$i]["puntosCruz"] < $arrayDatosJuegos[$i]["puntosCirculo"]) {
+            
+               $puntosGanar++;
+               $puntosTotal = $puntosTotal + $arrayDatosJuegos[$i]["puntosCirculo"];
+               $i++;
+            
+            } elseif ($nombreJugador == $arrayDatosJuegos[$i]["jugadorCirculo"]) {
+    
+              if ($arrayDatosJuegos[$i]["puntosCruz"] == $arrayDatosJuegos[$i]["puntosCirculo"]) {
+                $puntosEmpatar++;
+                $puntosTotal = $puntosTotal + $arrayDatosJuegos[$i]["puntosCirculo"];
+                $i++;
+                
+              } else {
+                
+                 $puntosPerder++;
+                 $i++;
+    
+                }
+    
+            }
+            
+          }
+    
+        }
+    
+      }
+      // se crea un array para almacenar el nombre y el registro de juegos del jugador
+      $nombreJugador = array(
+        "nombre" => $nombreJugador,
+        "juegosGanados" => $puntosGanar,
+        "juegosPerdidos" => $puntosPerder,
+        "juegosEmpatados" => $puntosEmpatar,
+        "puntosAcumulados" => $puntosTotal,
+      );
+      //retorno el nombre del jugador en cuestion.
+      return $nombreJugador;
+    }
 
 
 /** (PUNTO 8)
@@ -330,7 +417,15 @@ do {
 
 
     if ($opcion == 5) { 
-        echo "funcion 5\n";
+        $resumen = resumenJugador($coleccionJuegos);
+        
+        echo "**********************\n";
+        echo "Jugador: ".$resumen["nombre"]."\n";
+        echo "Ganó: ".$resumen["juegosGanados"]." juegos\n";
+        echo "Perdió: ".$resumen["juegosPerdidos"]." juegos\n";
+        echo "Empató: ".$resumen["juegosEmpatados"]." juegos\n";
+        echo "Total de puntos acumulados: ".$resumen["puntosAcumulados"]." puntos\n";
+        echo "**********************\n";
     }
 
 
