@@ -87,7 +87,7 @@ function resumenJugador($coleccionJuegos) {
                 
 
 
-var_dump(resumenJugador($arrayDeEjemplo));
+//var_dump(resumenJugador($arrayDeEjemplo));
 
 
 // ------------------------------------------
@@ -109,4 +109,6 @@ function ordenadoPorO($coleccionDeJuegos) {
   print_r($coleccionDeJuegos);
 }
 
-// ordenadoPorO($arrayDeEjemplo);
+ordenadoPorO($arrayDeEjemplo);
+
+//echo $arrayDeEjemplo[2]["jugadorCirculo"];

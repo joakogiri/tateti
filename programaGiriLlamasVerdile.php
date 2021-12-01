@@ -119,6 +119,8 @@ function mostrarJuego($juegosColeccion) {
     echo "Número de juego a mostrar: ";
     $flag = true;
 
+
+    // Este loop va a funcionar de forma indefinida mientras el número de juego NO sea válido.
     do {
 
         $numeroJuego = trim(fgets(STDIN));
@@ -357,7 +359,21 @@ function juegosGanadosPorSimbolo($simbolo, $arrayJuegos) {
 /** (PUNTO 11)
  * ACÁ VA EL PUNTO 6 DE MARCOS
 */
+function ordenadoPorO($coleccionDeJuegos) {
 
+    function cmp($a, $b) {
+  
+      if($a['jugadorCirculo'] == $b['jugadorCruz']) {
+  
+          return 0;
+      }
+  
+      return ($a['jugadorCirculo'] > $b['jugadorCruz']) ? -1 : 1;
+  }
+  
+    uasort($coleccionDeJuegos, 'cmp');
+    print_r($coleccionDeJuegos);
+  }
 
 
 
@@ -457,7 +473,7 @@ do {
 
 
     if ($opcion == 6) {
-        echo "funcion 6\n";
+        ordenadoPorO($coleccionJuegos);
     }
 
     if ($opcion == 7) {
