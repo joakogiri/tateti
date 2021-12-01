@@ -110,9 +110,51 @@ function obtenerNumeroValidoMenu()
 }
 
 /** (PUNTO 4)
- *  ACÁ VA EL PUNTO 2 DE YAMI
+ *  Función que busca un juego determinado en el array de juegos en base al número que provea el usuario
+ *  Y lo imprime en pantalla
+ * @param array $juegosColeccion
 */
+function mostrarJuego($juegosColeccion) {
 
+    echo "Número de juego a mostrar: ";
+    $flag = true;
+
+    do {
+
+        $numeroJuego = trim(fgets(STDIN));
+
+        if (is_numeric($numeroJuego) && $numeroJuego > 0 && $numeroJuego <= count($juegosColeccion)) {
+
+            if ($juegosColeccion[($numeroJuego - 1)]["puntosCruz"] > $juegosColeccion[($numeroJuego - 1)]["puntosCirculo"] ) {
+    
+                $resultado = "gana X";
+        
+            } elseif ($juegosColeccion[($numeroJuego - 1)]["puntosCruz"] < $juegosColeccion[($numeroJuego - 1)]["puntosCirculo"]) {
+        
+                $resultado = "gana O";
+        
+            } else {
+        
+                $resultado = "empate";
+        
+            }
+        
+            echo "**********************\n";
+            echo "Juego TATETI: ".$numeroJuego." (".$resultado.")\n";
+            echo "Jugador X: ".$juegosColeccion[(($numeroJuego - 1))]["jugadorCruz"]." obtuvo ".$juegosColeccion[(($numeroJuego - 1))]["puntosCruz"]." puntos\n";
+            echo "Jugador O: ".$juegosColeccion[(($numeroJuego - 1))]["jugadorCirculo"]." obtuvo ".$juegosColeccion[(($numeroJuego - 1))]["puntosCirculo"]." puntos\n";
+            echo "**********************\n";
+
+            $flag = false;
+
+        } else {
+            echo "Debes ingresar un número válido: ";
+        }
+        
+    } while ($flag);
+
+    
+}
 
 
 
@@ -347,7 +389,8 @@ do {
 
 
     if ($opcion == 2) {
-        echo "Funcion 2\n";
+        
+        mostrarJuego($coleccionJuegos);
 
     }
 
@@ -417,6 +460,10 @@ do {
         echo "funcion 6\n";
     }
 
+    if ($opcion == 7) {
+        echo "Gracias por jugar!";
+    }
+
 } while ($opcion != 7);
 
 
@@ -450,8 +497,8 @@ switch ($i) {
         echo "3";
         break;
 }
-break; sirve para cortar la continuidad del código dada la evaluación. De otra forma, al momento de ser $i = 2, se ejecutaria el caso 2 y luego el caso 3 dado que no hay nada que impida que el código se continúe leyendo y ejecutando.
+""break;" sirve para cortar la continuidad del código dada la evaluación. De otra forma, al momento de ser $i = 2, se ejecutaria el caso 2 y luego el caso 3 dado que no hay nada que impida que el código se continúe leyendo y ejecutando.
 
-Esta estructura de control es de tipo alternativa
+Esta estructura de control es de tipo alternativa.
 
 */
