@@ -138,7 +138,7 @@ function mostrarJuego($juegosColeccion, $nroJuego) {
     
         $resultado = "gana X";
 
-    } elseif ($juegosColeccion[($nroJuego)]["puntosCruz"] < $juegosColeccion[($nroJuego)]["puntosCirculo"]) {
+    } elseif ($juegosColeccion[($nroJuego )]["puntosCruz"] < $juegosColeccion[($nroJuego )]["puntosCirculo"]) {
 
         $resultado = "gana O";
 
@@ -187,19 +187,29 @@ function agregarJuego($datosJuego, $arrayDondeGuardar) {
  */
 
 function indicePrimerJuegoGanador($nombreJugador, $arrayJuegos) {
+   
+    //$i < count($arrayJuegos)
+    $n = count ($arrayJuegos);
+    $j = 0;
     $i = 0;
+    $flag = true;
     
-    while ($i < count($arrayJuegos)) {
+    do {
         if ($nombreJugador == $arrayJuegos[$i]["jugadorCruz"] && $arrayJuegos[$i]["puntosCruz"] > $arrayJuegos[$i]["puntosCirculo"]) {
-            return $i;
+            $j=$i;
+            $flag = false;
             
-        } elseif ($nombreJugador == $arrayJuegos[$i]["jugadorCirculo"] && $arrayJuegos[$i]["puntosCruz"] < $arrayJuegos[$i]["puntosCirculo"]) {
-            return $i;
+         } 
+        elseif ($nombreJugador == $arrayJuegos[$i]["jugadorCirculo"] && $arrayJuegos[$i]["puntosCruz"] < $arrayJuegos[$i]["puntosCirculo"]) {
+            $j=$i;
+            $flag = false;
         }
+         else{$j= -1;}
         $i++;
     }
+    while ($flag == true);
+    return $j;
 
-    return -1;
 }
 
 /** (PUNTO 7)
@@ -401,7 +411,7 @@ do {
     }
 
 
-    if ($opcion == 2) {
+    elseif ($opcion == 2) {
 
         echo "Número de juego a mostrar: ";
         $flag = true;
@@ -412,7 +422,7 @@ do {
 
         $numeroJuego = trim(fgets(STDIN)) - 1;
 
-        if (is_numeric($numeroJuego) && $numeroJuego > 0 && $numeroJuego <= count($juegosColeccion)) {
+        if (is_numeric($numeroJuego) && $numeroJuego >= 0 && $numeroJuego <= count($coleccionJuegos)) {
 
             mostrarJuego($coleccionJuegos, $numeroJuego);
 
@@ -429,7 +439,7 @@ do {
     }
 
 
-    if ($opcion == 3) {
+    elseif ($opcion == 3) {
         echo "Introduce nombre de jugador: \n";
         $nombreJugador = strtoupper(strval(trim(fgets(STDIN))));
         $indice = indicePrimerJuegoGanador($nombreJugador, $coleccionJuegos);
@@ -464,7 +474,7 @@ do {
         
 
 
-    if ($opcion == 4) {
+    elseif ($opcion == 4) {
         
         $simbolo = solicitarSimbolo();
 
@@ -480,7 +490,7 @@ do {
     }
 
 
-    if ($opcion == 5) { 
+    elseif ($opcion == 5) { 
         $resumen = resumenJugador($coleccionJuegos);
         
         echo "**********************\n";
@@ -493,11 +503,11 @@ do {
     }
 
 
-    if ($opcion == 6) {
+    elseif ($opcion == 6) {
         ordenadoPorO($coleccionJuegos);
     }
 
-    if ($opcion == 7) {
+    elseif ($opcion == 7) {
         echo "Gracias por jugar!";
     }
 
