@@ -132,46 +132,29 @@ function obtenerNumeroValidoMenu()
  *  Y lo imprime en pantalla
  * @param array $juegosColeccion
 */
-function mostrarJuego($juegosColeccion) {
+function mostrarJuego($juegosColeccion, $nroJuego) {
 
-    echo "Número de juego a mostrar: ";
-    $flag = true;
-
-
-    // Este loop va a funcionar de forma indefinida mientras el número de juego NO sea válido.
-    do {
-
-        $numeroJuego = trim(fgets(STDIN));
-
-        if (is_numeric($numeroJuego) && $numeroJuego > 0 && $numeroJuego <= count($juegosColeccion)) {
-
-            if ($juegosColeccion[($numeroJuego - 1)]["puntosCruz"] > $juegosColeccion[($numeroJuego - 1)]["puntosCirculo"] ) {
+    if ($juegosColeccion[($nroJuego)]["puntosCruz"] > $juegosColeccion[($nroJuego)]["puntosCirculo"] ) {
     
-                $resultado = "gana X";
-        
-            } elseif ($juegosColeccion[($numeroJuego - 1)]["puntosCruz"] < $juegosColeccion[($numeroJuego - 1)]["puntosCirculo"]) {
-        
-                $resultado = "gana O";
-        
-            } else {
-        
-                $resultado = "empate";
-        
-            }
-        
-            echo "**********************\n";
-            echo "Juego TATETI: ".$numeroJuego." (".$resultado.")\n";
-            echo "Jugador X: ".$juegosColeccion[(($numeroJuego - 1))]["jugadorCruz"]." obtuvo ".$juegosColeccion[(($numeroJuego - 1))]["puntosCruz"]." puntos\n";
-            echo "Jugador O: ".$juegosColeccion[(($numeroJuego - 1))]["jugadorCirculo"]." obtuvo ".$juegosColeccion[(($numeroJuego - 1))]["puntosCirculo"]." puntos\n";
-            echo "**********************\n";
+        $resultado = "gana X";
 
-            $flag = false;
+    } elseif ($juegosColeccion[($nroJuego)]["puntosCruz"] < $juegosColeccion[($nroJuego)]["puntosCirculo"]) {
 
-        } else {
-            echo "Debes ingresar un número válido: ";
-        }
-        
-    } while ($flag);
+        $resultado = "gana O";
+
+    } else {
+
+        $resultado = "empate";
+
+    }
+
+    echo "**********************\n";
+    echo "Juego TATETI: ".($nroJuego + 1)." (".$resultado.")\n";
+    echo "Jugador X: ".$juegosColeccion[(($nroJuego))]["jugadorCruz"]." obtuvo ".$juegosColeccion[(($nroJuego))]["puntosCruz"]." puntos\n";
+    echo "Jugador O: ".$juegosColeccion[(($nroJuego))]["jugadorCirculo"]." obtuvo ".$juegosColeccion[(($nroJuego))]["puntosCirculo"]." puntos\n";
+    echo "**********************\n";
+
+    
 
     
 }
@@ -419,8 +402,29 @@ do {
 
 
     if ($opcion == 2) {
+
+        echo "Número de juego a mostrar: ";
+        $flag = true;
+
+
+    // Este loop va a funcionar de forma indefinida mientras el número de juego NO sea válido.
+     do {
+
+        $numeroJuego = trim(fgets(STDIN)) - 1;
+
+        if (is_numeric($numeroJuego) && $numeroJuego > 0 && $numeroJuego <= count($juegosColeccion)) {
+
+            mostrarJuego($coleccionJuegos, $numeroJuego);
+
+            
+            $flag = false;
+
+        } else {
+            echo "Debes ingresar un número válido: ";
+        }
         
-        mostrarJuego($coleccionJuegos);
+        } while ($flag);
+        
 
     }
 
@@ -431,6 +435,8 @@ do {
         $indice = indicePrimerJuegoGanador($nombreJugador, $coleccionJuegos);
 
 
+        mostrarJuego($coleccionJuegos, $indice);
+        /*
         if($indice == -1) {
 
             echo "El jugador ".$nombreJugador." no ha ganado ningún juego.\n";
@@ -451,7 +457,8 @@ do {
             echo "Jugador X: " .$coleccionJuegos[$indice]["jugadorCruz"]." obtuvo ".$coleccionJuegos[$indice]["puntosCruz"]." puntos\n";
             echo "Jugador X: " .$coleccionJuegos[$indice]["jugadorCirculo"]." obtuvo ".$coleccionJuegos[$indice]["puntosCirculo"]." puntos\n";
             echo "**********************\n";
-        }
+            
+        }*/
     }
 
         
