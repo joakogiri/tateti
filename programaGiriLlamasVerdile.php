@@ -188,26 +188,36 @@ function agregarJuego($datosJuego, $arrayDondeGuardar) {
 
 function indicePrimerJuegoGanador($nombreJugador, $arrayJuegos) {
    
-    //$i < count($arrayJuegos)
-    $n = count ($arrayJuegos);
-    $j = 0;
+    $n = count($arrayJuegos);
+    $j = -1;
     $i = 0;
     $flag = true;
-    
+
     do {
-        if ($nombreJugador == $arrayJuegos[$i]["jugadorCruz"] && $arrayJuegos[$i]["puntosCruz"] > $arrayJuegos[$i]["puntosCirculo"]) {
-            $j=$i;
-            $flag = false;
+        if ($nombreJugador == $arrayJuegos[$i]["jugadorCruz"]) {
+
+            if ($arrayJuegos[$i]["puntosCruz"] > $arrayJuegos[$i]["puntosCirculo"]) {
+
+                $j = $i;
+                $flag = false;
+
+            }
             
-         } 
-        elseif ($nombreJugador == $arrayJuegos[$i]["jugadorCirculo"] && $arrayJuegos[$i]["puntosCruz"] < $arrayJuegos[$i]["puntosCirculo"]) {
-            $j=$i;
-            $flag = false;
-        }
-         else{$j= -1;}
+         }
+
+        elseif ($nombreJugador == $arrayJuegos[$i]["jugadorCirculo"]) {
+
+            if ($arrayJuegos[$i]["puntosCruz"] < $arrayJuegos[$i]["puntosCirculo"]) {
+
+                $j = $i;
+                $flag = false;
+
+            }
+
+        } 
         $i++;
-    }
-    while ($flag == true);
+    } while ($flag && $i < $n);
+
     return $j;
 
 }
@@ -444,8 +454,15 @@ do {
         $nombreJugador = strtoupper(strval(trim(fgets(STDIN))));
         $indice = indicePrimerJuegoGanador($nombreJugador, $coleccionJuegos);
 
+        if ($indice == -1) {
 
-        mostrarJuego($coleccionJuegos, $indice);
+            echo "El jugador no ganó ningún juego.\n";
+
+        } else {
+
+            mostrarJuego($coleccionJuegos, $indice);
+        }
+
         /*
         if($indice == -1) {
 
@@ -550,10 +567,3 @@ Esta estructura de control es de tipo alternativa.
 
 */
 
-
-/** COSAS A CORREGIR
- * ifs en menu por if-elseif-elseif
- * cambiar los 3 returns en punto 3 por uno solo
- * posibilidad de reutilizar funcion mostrar juegos
- * documentar cmp
- */
