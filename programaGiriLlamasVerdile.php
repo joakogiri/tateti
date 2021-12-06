@@ -133,6 +133,8 @@ function obtenerNumeroValidoMenu()
  * @param array $juegosColeccion
 */
 function mostrarJuego($juegosColeccion, $nroJuego) {
+   
+
 
     if ($juegosColeccion[($nroJuego)]["puntosCruz"] > $juegosColeccion[($nroJuego)]["puntosCirculo"] ) {
     
@@ -155,12 +157,7 @@ function mostrarJuego($juegosColeccion, $nroJuego) {
     echo "**********************\n";
 
     
-
-    
 }
-
-
-
 
 
 /** (PUNTO 5)
@@ -188,36 +185,26 @@ function agregarJuego($datosJuego, $arrayDondeGuardar) {
 
 function indicePrimerJuegoGanador($nombreJugador, $arrayJuegos) {
    
-    $n = count($arrayJuegos);
-    $j = -1;
+    //$i < count($arrayJuegos)
+    $n = count ($arrayJuegos);
+    $j = 0;
     $i = 0;
     $flag = true;
-
+    
     do {
-        if ($nombreJugador == $arrayJuegos[$i]["jugadorCruz"]) {
-
-            if ($arrayJuegos[$i]["puntosCruz"] > $arrayJuegos[$i]["puntosCirculo"]) {
-
-                $j = $i;
-                $flag = false;
-
-            }
+        if ($nombreJugador == $arrayJuegos[$i]["jugadorCruz"] && $arrayJuegos[$i]["puntosCruz"] > $arrayJuegos[$i]["puntosCirculo"]) {
+            $j=$i;
+            $flag = false;
             
-         }
-
-        elseif ($nombreJugador == $arrayJuegos[$i]["jugadorCirculo"]) {
-
-            if ($arrayJuegos[$i]["puntosCruz"] < $arrayJuegos[$i]["puntosCirculo"]) {
-
-                $j = $i;
-                $flag = false;
-
-            }
-
-        } 
+         } 
+        elseif ($nombreJugador == $arrayJuegos[$i]["jugadorCirculo"] && $arrayJuegos[$i]["puntosCruz"] < $arrayJuegos[$i]["puntosCirculo"]) {
+            $j=$i;
+            $flag = false;
+        }
+         else{$j= -1;}
         $i++;
-    } while ($flag && $i < $n);
-
+    }
+    while ($flag == true);
     return $j;
 
 }
@@ -388,11 +375,16 @@ function ordenadoPorO($coleccionDeJuegos) {
     uasort($coleccionDeJuegos, 'cmp');
     print_r($coleccionDeJuegos);
   }
-
+  
   function cmp($a, $b) {
   
     return strcmp($a['jugadorCirculo'], $b['jugadorCirculo']);
   }
+/** 
+ *se les asigna un numero a los elementos del array para ser ordenados (-1 , 0 y 1)
+ * posteriormente la funcion compara los valores de a 2 y modifica su orden de forma creciente
+ *se retorna el nuevo orden de los elementos , esto solo se visualiza en el print_r ya que no se modifica el array en si
+ */
 
 
 /** 12)
@@ -454,15 +446,8 @@ do {
         $nombreJugador = strtoupper(strval(trim(fgets(STDIN))));
         $indice = indicePrimerJuegoGanador($nombreJugador, $coleccionJuegos);
 
-        if ($indice == -1) {
 
-            echo "El jugador no ganó ningún juego.\n";
-
-        } else {
-
-            mostrarJuego($coleccionJuegos, $indice);
-        }
-
+        mostrarJuego($coleccionJuegos, $indice);
         /*
         if($indice == -1) {
 
@@ -566,4 +551,5 @@ switch ($i) {
 Esta estructura de control es de tipo alternativa.
 
 */
+
 
