@@ -374,17 +374,18 @@ function ordenadoPorO($coleccionDeJuegos) {
   
     uasort($coleccionDeJuegos, 'cmp');
     print_r($coleccionDeJuegos);
+ /** 
+ *se les asigna un numero a los elementos del array para ser ordenados (-1 , 0 y 1)
+ * posteriormente la funcion compara los valores de a 2 y modifica su orden de forma creciente
+ *se retorna el nuevo orden de los elementos , esto solo se visualiza en el print_r ya que no se modifica el array en si
+ */
   }
   
   function cmp($a, $b) {
   
     return strcmp($a['jugadorCirculo'], $b['jugadorCirculo']);
   }
-/** 
- *se les asigna un numero a los elementos del array para ser ordenados (-1 , 0 y 1)
- * posteriormente la funcion compara los valores de a 2 y modifica su orden de forma creciente
- *se retorna el nuevo orden de los elementos , esto solo se visualiza en el print_r ya que no se modifica el array en si
- */
+
 
 
 /** 12)
